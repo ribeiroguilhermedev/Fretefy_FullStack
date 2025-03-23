@@ -46,4 +46,11 @@ export class RegiaoService {
             })))
         );
     }
+
+    toggleAtivo(id: string, ativoAtual: boolean): Observable<any> {
+        const payload = {
+            ativo: !ativoAtual
+        };
+        return this.http.patch(`${this.apiUrl}/${id}/toggle-ativo`, payload);
+    }
 } 

@@ -92,6 +92,38 @@
   }
 }
 
+.acoes {
+  display: flex;
+  gap: 8px;
+  
+  button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.2s;
+  }
+  
+  .btn-editar {
+    background-color: cornflowerblue;
+    color: white;
+    
+    &:hover {
+      background-color: royalblue;
+    }
+  }
+  
+  .btn-toggle {
+    background-color: orange;
+    color: white;
+    
+    &:hover {
+      background-color: darkorange;
+    }
+  }
+}
+
 .cidades-container {
   background-color: whitesmoke;
   

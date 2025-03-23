@@ -25,4 +25,16 @@ export class RegiaoComponent implements OnInit {
     this.filtro = _filtro;
     this.carregarRegioes();
   }
+
+  editarRegiao(regiao: Regiao) {
+    console.log(regiao);
+  }
+
+  toggleAtivoRegiao(regiao: Regiao) {
+    this.regiaoService.toggleAtivo(regiao.id, regiao.ativo).subscribe(
+      () => {
+        this.carregarRegioes();
+      }
+    );
+  }
 }

@@ -29,6 +29,7 @@
         <th>Atualizado Em</th>
         <th>Status</th>
         <th>Cidades</th>
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -48,9 +49,17 @@
               {{ regiao.mostrarCidades ? 'Esconder Cidades' : 'Mostrar Cidades' }}
             </button>
           </td>
+          <td class="acoes">
+            <button class="btn-editar" (click)="editarRegiao(regiao)">
+              Editar
+            </button>
+            <button class="btn-toggle" (click)="toggleAtivoRegiao(regiao)">
+              {{ regiao.ativo ? 'Desativar' : 'Ativar' }}
+            </button>
+          </td>
         </tr>
         <tr *ngIf="regiao.mostrarCidades" class="cidades-container">
-          <td colspan="6">
+          <td colspan="7">
             <div class="cidades-list">
               <h4>Cidades da Região</h4>
               <table class="cidades-table">
