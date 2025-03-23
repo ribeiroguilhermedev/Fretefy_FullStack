@@ -2,6 +2,7 @@ using Fretefy.Test.Domain.DTOs;
 using Fretefy.Test.Domain.DTOs.Regiao;
 using Fretefy.Test.Domain.Entities;
 using Fretefy.Test.Domain.Interfaces.Services;
+using Fretefy.Test.Domain.Validators;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace Fretefy.Test.WebApi.Controllers
                 .Select(RegiaoOutputDto.FromEntity)
                 .OrderByDescending(r => r.CriadoEm)
                 .ToList();
+
             return Ok(result);
         }
 
@@ -34,6 +36,7 @@ namespace Fretefy.Test.WebApi.Controllers
         public IActionResult Get(Guid id)
         {
             var regiao = _regiaoService.Get(id);
+
             if (regiao == null)
                 return NotFound();
 
@@ -44,6 +47,11 @@ namespace Fretefy.Test.WebApi.Controllers
         [HttpPost("nested")]
         public IActionResult PostAninhado([FromBody] RegiaoNestedDto regiaoNestedDto)
         {
+            var validation = regiaoNestedDto.ValidarRequest();
+
+            if (!validation.IsValid)
+                return BadRequest(validation.ErrorMessage);
+
             var regiao = _regiaoService.Add(regiaoNestedDto);
             var result = RegiaoOutputDto.FromEntity(regiao);
 
@@ -53,6 +61,11 @@ namespace Fretefy.Test.WebApi.Controllers
         [HttpPost("{id}/cidades")]
         public IActionResult AdicionarCidades(Guid id, [FromBody] AdicionarCidadesRegiaoDto cidadesDto)
         {
+            var validation = cidadesDto.ValidarRequest();
+
+            if (!validation.IsValid)
+                return BadRequest(validation.ErrorMessage);
+            
             var regiao = _regiaoService.AdicionarCidades(id, cidadesDto);
             
             if (regiao == null)
@@ -77,6 +90,11 @@ namespace Fretefy.Test.WebApi.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(Guid id, [FromBody] AtualizarRegiaoDto regiaoDto)
         {
+            var validation = regiaoDto.ValidarRequest();
+
+            if (!validation.IsValid)
+                return BadRequest(validation.ErrorMessage);
+            
             var regiao = _regiaoService.Update(id, regiaoDto);
             
             if (regiao == null)
