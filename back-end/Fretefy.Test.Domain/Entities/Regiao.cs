@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Fretefy.Test.Domain.Entities
 {
-    public class Regiao : IEntity
+    public sealed class Regiao : IEntity
     {
         public Regiao()
         {
@@ -24,6 +24,6 @@ namespace Fretefy.Test.Domain.Entities
 
         public string Descricao { get; set; }
 
-        public virtual ICollection<RegiaoCidade> RegioesCidades { get; set; }
+        public ICollection<RegiaoCidade> RegioesCidades { get; set; }
     }
 } 
