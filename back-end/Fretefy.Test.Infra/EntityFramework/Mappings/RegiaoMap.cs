@@ -13,6 +13,7 @@ namespace Fretefy.Test.Infra.EntityFramework.Mappings
             builder.Property(p => p.Descricao).HasMaxLength(500);
             builder.Property(p => p.CriadoEm).IsRequired();
             builder.Property(p => p.AtualizadoEm).IsRequired();
+            builder.Property(p => p.Ativo).IsRequired().HasDefaultValue(true);
         }
     }
 } 

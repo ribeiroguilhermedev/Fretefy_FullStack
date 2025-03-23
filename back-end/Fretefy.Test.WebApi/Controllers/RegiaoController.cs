@@ -113,5 +113,18 @@ namespace Fretefy.Test.WebApi.Controllers
                 
             return NoContent();
         }
+        
+        [HttpPatch("{id}/toggle-ativo")]
+        public IActionResult ToggleAtivo(Guid id, [FromBody] ToggleAtivoRegiaoDto toggleDto = null)
+        {
+            var regiao = _regiaoService.ToggleAtivo(id, toggleDto);
+            
+            if (regiao == null)
+                return NotFound();
+                
+            var result = RegiaoOutputDto.FromEntity(regiao);
+            
+            return Ok(result);
+        }
     }
 }

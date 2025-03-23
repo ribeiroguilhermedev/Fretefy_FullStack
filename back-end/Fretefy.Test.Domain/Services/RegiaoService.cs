@@ -87,5 +87,17 @@ namespace Fretefy.Test.Domain.Services
         {
             return _regiaoRepository.RemoverRegiaoCidade(regiaoId, cidadeId);
         }
+        
+        public Regiao ToggleAtivo(Guid id, ToggleAtivoRegiaoDto toggleDto)
+        {
+            var regiao = _regiaoRepository.GetById(id);
+            if (regiao == null)
+                return null;
+                
+            regiao.Ativo = toggleDto != null ? toggleDto.Ativo : !regiao.Ativo;
+            regiao.AtualizadoEm = DateTime.Now;
+            
+            return _regiaoRepository.Update(regiao);
+        }
     }
 }
