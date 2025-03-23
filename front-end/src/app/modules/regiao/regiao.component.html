@@ -1,4 +1,9 @@
 <div class="regioes-container">
+  <div class="header-actions">
+    <h2>Regiões</h2>
+    <a [routerLink]="['/regiao/nova']" class="btn-nova-regiao">Nova Região</a>
+  </div>
+
   <div class="filtros">
     <label>Filtrar por status:</label>
     <div class="botoes-filtro">
@@ -50,9 +55,9 @@
             </button>
           </td>
           <td class="acoes">
-            <button class="btn-editar" (click)="editarRegiao(regiao)">
+            <a [routerLink]="['/regiao/editar', regiao.id]" class="btn-editar">
               Editar
-            </button>
+            </a>
             <button class="btn-toggle" (click)="toggleAtivoRegiao(regiao)">
               {{ regiao.ativo ? 'Desativar' : 'Ativar' }}
             </button>

@@ -125,12 +125,19 @@ namespace Fretefy.Test.WebApi.Controllers
         [HttpDelete("{regiaoId}/cidades/{cidadeId}")]
         public IActionResult RemoverCidade(Guid regiaoId, Guid cidadeId)
         {
-            var result = _regiaoService.RemoverCidade(regiaoId, cidadeId);
-            
-            if (!result)
-                return NotFound();
+            try
+            {
+                var result = _regiaoService.RemoverCidade(regiaoId, cidadeId);
                 
-            return NoContent();
+                if (!result)
+                    return NotFound();
+                    
+                return NoContent();
+            }
+            catch (UltimaCidadeRegiaoException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
         
         [HttpPatch("{id}/toggle-ativo")]

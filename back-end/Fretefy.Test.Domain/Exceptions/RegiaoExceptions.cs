@@ -12,4 +12,10 @@ namespace Fretefy.Test.Domain.Exceptions
         public RegiaoNomeJaExisteException(string nome) 
             : base($"Já existe uma região com o nome '{nome}'") { }
     }
+    
+    public class UltimaCidadeRegiaoException : RegiaoException
+    {
+        public UltimaCidadeRegiaoException(string regiaoNome) 
+            : base($"A regiÃo {regiaoNome} deve possuir pelo menos uma cidade") { }
+    }
 } 

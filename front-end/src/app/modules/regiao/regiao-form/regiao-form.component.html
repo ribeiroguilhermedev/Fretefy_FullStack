@@ -1,0 +1,90 @@
+<div class="regiao-form-container">
+  <h2>{{ modoEdicao ? 'Editar Região' : 'Nova Região' }}</h2>
+  
+  <div *ngIf="errorMessage" class="api-error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+  
+  <form [formGroup]="regiaoForm" (ngSubmit)="onSubmit()" class="regiao-form">
+    <div class="form-group">
+      <label for="nome">Nome*</label>
+      <input 
+        id="nome" 
+        type="text" 
+        formControlName="nome" 
+        class="form-control"
+        [ngClass]="{'invalid': enviouForm && nome.invalid}"
+      >
+      <div *ngIf="enviouForm && nome.invalid" class="error-message">
+        <span *ngIf="nome.errors?.required">O nome é obrigatório.</span>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="descricao">Descrição</label>
+      <textarea 
+        id="descricao" 
+        formControlName="descricao" 
+        class="form-control"
+        rows="3"
+      ></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label>Cidades{{ !modoEdicao ? '*' : '' }}</label>
+      <div class="cidade-selector">
+        <div class="cidade-input-group">
+          <select 
+            [(ngModel)]="cidadeSelecionada" 
+            [ngModelOptions]="{standalone: true}" 
+            class="form-control cidade-select"
+          >
+            <option value="">Selecione uma cidade</option>
+            <option *ngFor="let cidade of cidadesDisponiveis" [value]="cidade.id">
+              {{cidade.nome}} - {{cidade.uf}}
+            </option>
+          </select>
+          <button 
+            type="button" 
+            class="btn-adicionar" 
+            (click)="adicionarCidade()" 
+            [disabled]="!cidadeSelecionada"
+          >
+            Adicionar
+          </button>
+        </div>
+        
+        <div *ngIf="enviouForm && !modoEdicao && cidadesFormArray.invalid" class="error-message">
+          <span *ngIf="cidadesFormArray.errors?.required || cidadesFormArray.errors?.minLength">
+            É necessário adicionar pelo menos uma cidade.
+          </span>
+        </div>
+        
+        <div class="cidades-lista" *ngIf="cidadesFormArray.controls.length > 0">
+          <h4>Cidades Selecionadas</h4>
+          <ul>
+            <li *ngFor="let cidadeControl of cidadesFormArray.controls; let i = index">
+              <div class="cidade-item">
+                <span>{{ cidadeControl.value.nome }} - {{ cidadeControl.value.uf }}</span>
+                <button 
+                  type="button" 
+                  class="btn-remover"
+                  (click)="removerCidade(i)"
+                >
+                  {{ modoEdicao ? 'Remover da Região' : 'Limpar' }}
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-actions">
+      <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+      <button type="submit" class="btn-salvar">
+        {{ modoEdicao ? 'Atualizar' : 'Salvar' }}
+      </button>
+    </div>
+  </form>
+</div> 

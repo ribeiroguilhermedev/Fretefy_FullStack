@@ -92,6 +92,16 @@ namespace Fretefy.Test.Domain.Services
         
         public bool RemoverCidade(Guid regiaoId, Guid cidadeId)
         {
+            var regiao = _regiaoRepository.GetById(regiaoId);
+            if (regiao == null)
+                return false;
+                
+            if (regiao.RegioesCidades.Count() == 1 && 
+                regiao.RegioesCidades.Any(rc => rc.CidadeId == cidadeId))
+            {
+                throw new UltimaCidadeRegiaoException(regiao.Nome);
+            }
+            
             return _regiaoRepository.RemoverRegiaoCidade(regiaoId, cidadeId);
         }
         
@@ -113,7 +123,7 @@ namespace Fretefy.Test.Domain.Services
                 return false;
                 
             return _regiaoRepository.List()
-                .Any(r => r.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase));
+                .Any(r => r.Nome.ToLower() == nome.ToLower());
         }
     }
 }

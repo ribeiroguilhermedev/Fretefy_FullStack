@@ -1,9 +1,29 @@
 .regioes-container {
   padding: 20px;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
   
   h2 {
-    margin-bottom: 20px;
-    color: darkgray;
+    margin: 0;
+    color: #333;
+  }
+  
+  .btn-nova-regiao {
+    padding: 10px 16px;
+    background-color: forestgreen;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s;
+    
+    &:hover {
+      background-color: darkgreen;
+    }
   }
 }
 
@@ -84,7 +104,6 @@
   background-color: green;
   color: white;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
   
   &:hover {
@@ -96,18 +115,19 @@
   display: flex;
   gap: 8px;
   
-  button {
+  .btn-editar, .btn-toggle {
     padding: 5px 10px;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
     font-size: 12px;
     transition: background-color 0.2s;
+    display: inline-block;
   }
   
   .btn-editar {
     background-color: cornflowerblue;
     color: white;
+    text-decoration: none;
     
     &:hover {
       background-color: royalblue;
