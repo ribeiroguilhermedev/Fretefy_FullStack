@@ -15,5 +15,6 @@ namespace Fretefy.Test.Domain.Interfaces.Services
         Regiao Update(Guid id, AtualizarRegiaoDto regiaoDto);
         bool RemoverCidade(Guid regiaoId, Guid cidadeId);
         Regiao ToggleAtivo(Guid id, ToggleAtivoRegiaoDto toggleDto);
+        bool ExisteRegiaoComNome(string nome);
     }
 } 

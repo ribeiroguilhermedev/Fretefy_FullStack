@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Fretefy.Test.Domain.DTOs.Regiao;
 using Fretefy.Test.Domain.Entities;
+using Fretefy.Test.Domain.Exceptions;
 using Fretefy.Test.Domain.Interfaces.Repositories;
 using Fretefy.Test.Domain.Interfaces.Services;
 
@@ -29,6 +30,9 @@ namespace Fretefy.Test.Domain.Services
 
         public Regiao Add(RegiaoNestedDto regiaoNestedDto)
         {
+            if (ExisteRegiaoComNome(regiaoNestedDto.Regiao.Nome))
+                throw new RegiaoNomeJaExisteException(regiaoNestedDto.Regiao.Nome);
+            
             var regiao = new Regiao(regiaoNestedDto.Regiao.Nome, regiaoNestedDto.Regiao.Descricao);
             regiao = _regiaoRepository.Add(regiao);
 
@@ -76,6 +80,9 @@ namespace Fretefy.Test.Domain.Services
             var regiao = _regiaoRepository.GetById(id);
             if (regiao == null)
                 return null;
+            
+            if (regiao.Nome != regiaoDto.Nome && ExisteRegiaoComNome(regiaoDto.Nome))
+                throw new RegiaoNomeJaExisteException(regiaoDto.Nome);
                 
             regiao.Nome = regiaoDto.Nome;
             regiao.Descricao = regiaoDto.Descricao;
@@ -98,6 +105,15 @@ namespace Fretefy.Test.Domain.Services
             regiao.AtualizadoEm = DateTime.Now;
             
             return _regiaoRepository.Update(regiao);
+        }
+        
+        public bool ExisteRegiaoComNome(string nome)
+        {
+            if (string.IsNullOrWhiteSpace(nome))
+                return false;
+                
+            return _regiaoRepository.List()
+                .Any(r => r.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

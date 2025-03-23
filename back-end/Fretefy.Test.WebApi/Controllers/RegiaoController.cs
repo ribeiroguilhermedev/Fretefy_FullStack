@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Fretefy.Test.Domain.DTOs.Regiao;
+using Fretefy.Test.Domain.Exceptions;
 using Fretefy.Test.Domain.Interfaces.Services;
 using Fretefy.Test.Domain.Validators;
 using Microsoft.AspNetCore.Mvc;
@@ -54,10 +55,17 @@ namespace Fretefy.Test.WebApi.Controllers
             if (!validation.IsValid)
                 return BadRequest(validation.ErrorMessage);
 
-            var regiao = _regiaoService.Add(regiaoNestedDto);
-            var result = RegiaoOutputDto.FromEntity(regiao);
-
-            return CreatedAtAction(nameof(Get), new { id = regiao.Id }, result);
+            try
+            {
+                var regiao = _regiaoService.Add(regiaoNestedDto);
+                var result = RegiaoOutputDto.FromEntity(regiao);
+                
+                return CreatedAtAction(nameof(Get), new { id = regiao.Id }, result);
+            }
+            catch (RegiaoNomeJaExisteException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
 
         [HttpPost("{id}/cidades")]
@@ -97,14 +105,21 @@ namespace Fretefy.Test.WebApi.Controllers
             if (!validation.IsValid)
                 return BadRequest(validation.ErrorMessage);
             
-            var regiao = _regiaoService.Update(id, regiaoDto);
-            
-            if (regiao == null)
-                return NotFound();
+            try
+            {
+                var regiao = _regiaoService.Update(id, regiaoDto);
                 
-            var result = RegiaoOutputDto.FromEntity(regiao);
-            
-            return Ok(result);
+                if (regiao == null)
+                    return NotFound();
+                    
+                var result = RegiaoOutputDto.FromEntity(regiao);
+                
+                return Ok(result);
+            }
+            catch (RegiaoNomeJaExisteException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
         
         [HttpDelete("{regiaoId}/cidades/{cidadeId}")]
