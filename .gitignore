@@ -1,0 +1,19 @@
+# Ignore .NET Core build outputs
+/back-end/**/bin/
+/back-end/**/obj/
+
+/# Ignore publish folder
+/back-end/**/publish/
+
+/# Ignore log files
+/back-end/**/*.log
+
+# Ignore user-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore IDE
+/back-end/.idea
+
