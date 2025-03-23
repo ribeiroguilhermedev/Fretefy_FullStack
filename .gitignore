@@ -8,6 +8,9 @@
 /# Ignore log files
 /back-end/**/*.log
 
+/# Ignore db files
+/back-end/Fretefy.Test.WebApi/Data/Test.db* 
+
 # Ignore user-specific files
 *.suo
 *.user
