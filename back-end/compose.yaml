@@ -1,0 +1,13 @@
+﻿services:
+  fretefy.test.webapi:
+    image: fretefy.test.webapi
+    build:
+      context: .
+      dockerfile: Fretefy.Test.WebApi/Dockerfile
+    ports:
+      - "5001:80"
+    volumes:
+      - ./Fretefy.Test.WebApi/Data:/app/Data
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
