@@ -20,5 +20,6 @@ RUN dotnet publish "Fretefy.Test.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/
 
 FROM base AS final
 WORKDIR /app
+RUN mkdir -p /app/Data
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Fretefy.Test.WebApi.dll"]

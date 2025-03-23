@@ -12,8 +12,10 @@
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
   ef:
-    image: mcr.microsoft.com/dotnet/sdk:3.1
+    build:
+      context: ./Fretefy.Test.Infra/docker
+      dockerfile: Dockerfile
     volumes:
       - .:/src
+      - ./Fretefy.Test.WebApi/Data:/src/Fretefy.Test.WebApi/Data
     working_dir: /src
-    entrypoint: [ "tail", "-f", "/dev/null" ]
