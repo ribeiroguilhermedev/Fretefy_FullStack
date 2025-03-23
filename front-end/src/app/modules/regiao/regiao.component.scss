@@ -115,7 +115,7 @@
   display: flex;
   gap: 8px;
   
-  .btn-editar, .btn-toggle {
+  .btn-editar, .btn-toggle, .btn-excluir {
     padding: 5px 10px;
     border: none;
     cursor: pointer;
@@ -140,6 +140,15 @@
     
     &:hover {
       background-color: darkorange;
+    }
+  }
+  
+  .btn-excluir {
+    background-color: #dc3545;
+    color: white;
+    
+    &:hover {
+      background-color: #c82333;
     }
   }
 }

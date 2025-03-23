@@ -89,6 +89,10 @@ export class RegiaoService {
         return this.http.patch(`${this.apiUrl}/${id}/toggle-ativo`, payload);
     }
 
+    deleteRegiao(id: string): Observable<any> {
+        return this.http.delete(`${this.apiUrl}/${id}`);
+    }
+
     adicionarCidadeNaRegiao(regiaoId: string, cidadeId: string): Observable<any> {
         const payload = {
             cidadesIds: [cidadeId]

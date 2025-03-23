@@ -37,4 +37,10 @@ export class RegiaoComponent implements OnInit {
       }
     );
   }
+
+  excluirRegiao(regiao: Regiao) {
+    this.regiaoService.deleteRegiao(regiao.id).subscribe(() => {
+      this.carregarRegioes();
+    });
+  }
 }
