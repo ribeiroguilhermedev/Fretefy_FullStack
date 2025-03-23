@@ -19,9 +19,13 @@ namespace Fretefy.Test.WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult List()
+        public IActionResult List([FromQuery] bool? ativo = null)
         {
             var regioes = _regiaoService.List();
+            
+            if (ativo.HasValue)
+                regioes = regioes.Where(r => r.Ativo == ativo!.Value);
+                
             var result = regioes
                 .Select(RegiaoOutputDto.FromEntity)
                 .OrderByDescending(r => r.CriadoEm)
