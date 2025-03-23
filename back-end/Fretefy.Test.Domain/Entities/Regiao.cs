@@ -1,20 +1,20 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Fretefy.Test.Domain.Entities
 {
-    public class Cidade : IEntity
+    public class Regiao : IEntity
     {
-        public Cidade()
+        public Regiao()
         {
             RegioesCidades = new List<RegiaoCidade>();
         }
 
-        public Cidade(string nome, string uf)
+        public Regiao(string nome, string descricao)
         {
             Id = Guid.NewGuid();
             Nome = nome;
-            UF = uf;
+            Descricao = descricao;
             RegioesCidades = new List<RegiaoCidade>();
         }
 
@@ -22,8 +22,8 @@ namespace Fretefy.Test.Domain.Entities
 
         public string Nome { get; set; }
 
-        public string UF { get; set; }
-        
+        public string Descricao { get; set; }
+
         public virtual ICollection<RegiaoCidade> RegioesCidades { get; set; }
     }
-}
+} 
