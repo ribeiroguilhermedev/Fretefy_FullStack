@@ -1,11 +1,9 @@
-using Fretefy.Test.Domain.DTOs;
+using System;
+using System.Linq;
 using Fretefy.Test.Domain.DTOs.Regiao;
-using Fretefy.Test.Domain.Entities;
 using Fretefy.Test.Domain.Interfaces.Services;
 using Fretefy.Test.Domain.Validators;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
 
 namespace Fretefy.Test.WebApi.Controllers
 {

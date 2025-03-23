@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Fretefy.Test.Domain.Entities;
 
 namespace Fretefy.Test.Domain.DTOs.Regiao
 {
@@ -14,7 +13,7 @@ namespace Fretefy.Test.Domain.DTOs.Regiao
         public DateTime AtualizadoEm { get; set; }
         public List<CidadeOutputDto> Cidades { get; set; } = new List<CidadeOutputDto>();
 
-        public static RegiaoOutputDto FromEntity(Fretefy.Test.Domain.Entities.Regiao regiao)
+        public static RegiaoOutputDto FromEntity(Entities.Regiao regiao)
         {
             if (regiao == null)
                 return null;

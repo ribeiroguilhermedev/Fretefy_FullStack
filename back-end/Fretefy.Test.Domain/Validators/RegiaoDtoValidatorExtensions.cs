@@ -1,6 +1,6 @@
-using Fretefy.Test.Domain.DTOs.Regiao;
 using System;
 using System.Linq;
+using Fretefy.Test.Domain.DTOs.Regiao;
 
 namespace Fretefy.Test.Domain.Validators
 {

@@ -1,11 +1,10 @@
-using Fretefy.Test.Domain.DTOs;
-using Fretefy.Test.Domain.Entities;
-using Fretefy.Test.Domain.Interfaces.Repositories;
-using Fretefy.Test.Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fretefy.Test.Domain.DTOs.Regiao;
+using Fretefy.Test.Domain.Entities;
+using Fretefy.Test.Domain.Interfaces.Repositories;
+using Fretefy.Test.Domain.Interfaces.Services;
 
 namespace Fretefy.Test.Domain.Services
 {

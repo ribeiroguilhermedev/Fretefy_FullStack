@@ -1,8 +1,8 @@
-﻿using Fretefy.Test.Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using Fretefy.Test.Domain.Entities;
 using Fretefy.Test.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 
 namespace Fretefy.Test.WebApi.Controllers
 {
