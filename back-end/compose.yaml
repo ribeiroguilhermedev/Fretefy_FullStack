@@ -11,3 +11,9 @@
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
+  ef:
+    image: mcr.microsoft.com/dotnet/sdk:3.1
+    volumes:
+      - .:/src
+    working_dir: /src
+    entrypoint: [ "tail", "-f", "/dev/null" ]
