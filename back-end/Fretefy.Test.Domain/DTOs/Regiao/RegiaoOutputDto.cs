@@ -11,6 +11,7 @@ namespace Fretefy.Test.Domain.DTOs.Regiao
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public DateTime CriadoEm { get; set; }
+        public DateTime AtualizadoEm { get; set; }
         public List<CidadeOutputDto> Cidades { get; set; } = new List<CidadeOutputDto>();
 
         public static RegiaoOutputDto FromEntity(Fretefy.Test.Domain.Entities.Regiao regiao)
@@ -24,6 +25,7 @@ namespace Fretefy.Test.Domain.DTOs.Regiao
                 Nome = regiao.Nome,
                 Descricao = regiao.Descricao,
                 CriadoEm = regiao.CriadoEm,
+                AtualizadoEm = regiao.AtualizadoEm,
                 Cidades = regiao.RegioesCidades?
                     .Where(rc => rc.Cidade != null)
                     .Select(rc => new CidadeOutputDto

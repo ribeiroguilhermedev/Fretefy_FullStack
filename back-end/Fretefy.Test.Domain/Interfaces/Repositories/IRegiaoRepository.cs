@@ -11,5 +11,8 @@ namespace Fretefy.Test.Domain.Interfaces.Repositories
         Regiao GetById(Guid id);
         Regiao Add(Regiao regiao);
         void AddRegiaoCidade(RegiaoCidade regiaoCidade);
+        bool Delete(Guid id);
+        Regiao Update(Regiao regiao);
+        bool RemoverRegiaoCidade(Guid regiaoId, Guid cidadeId);
     }
 } 

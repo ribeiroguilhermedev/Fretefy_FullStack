@@ -46,5 +46,47 @@ namespace Fretefy.Test.Domain.Services
 
             return _regiaoRepository.GetById(regiao.Id);
         }
+
+        public Regiao AdicionarCidades(Guid regiaoId, AdicionarCidadesRegiaoDto cidadesDto)
+        {
+            var regiao = _regiaoRepository.GetById(regiaoId);
+            if (regiao == null)
+                return null;
+
+            if (cidadesDto.CidadesIds == null || !cidadesDto.CidadesIds.Any())
+                return _regiaoRepository.GetById(regiaoId);
+            
+            var cidadesExistentes = regiao.RegioesCidades.Select(rc => rc.CidadeId).ToList();
+                
+            var novasCidades = cidadesDto.CidadesIds.Where(id => !cidadesExistentes.Contains(id)).ToList();
+                
+            var regiaoCidades = novasCidades.Select(cidadeId => new RegiaoCidade(regiaoId, cidadeId)).ToList();
+            foreach (var regiaoCidade in regiaoCidades)
+                _regiaoRepository.AddRegiaoCidade(regiaoCidade);
+
+            return _regiaoRepository.GetById(regiaoId);
+        }
+        
+        public bool Delete(Guid id)
+        {
+            return _regiaoRepository.Delete(id);
+        }
+        
+        public Regiao Update(Guid id, AtualizarRegiaoDto regiaoDto)
+        {
+            var regiao = _regiaoRepository.GetById(id);
+            if (regiao == null)
+                return null;
+                
+            regiao.Nome = regiaoDto.Nome;
+            regiao.Descricao = regiaoDto.Descricao;
+            
+            return _regiaoRepository.Update(regiao);
+        }
+        
+        public bool RemoverCidade(Guid regiaoId, Guid cidadeId)
+        {
+            return _regiaoRepository.RemoverRegiaoCidade(regiaoId, cidadeId);
+        }
     }
 }

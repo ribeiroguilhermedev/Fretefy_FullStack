@@ -9,6 +9,7 @@ namespace Fretefy.Test.Domain.Entities
         {
             RegioesCidades = new List<RegiaoCidade>();
             CriadoEm = DateTime.Now;
+            AtualizadoEm = DateTime.Now;
         }
 
         public Regiao(string nome, string descricao)
@@ -18,6 +19,7 @@ namespace Fretefy.Test.Domain.Entities
             Descricao = descricao;
             RegioesCidades = new List<RegiaoCidade>();
             CriadoEm = DateTime.Now;
+            AtualizadoEm = DateTime.Now;
         }
 
         public Guid Id { get; set; }
@@ -27,6 +29,8 @@ namespace Fretefy.Test.Domain.Entities
         public string Descricao { get; set; }
 
         public DateTime CriadoEm { get; set; }
+
+        public DateTime AtualizadoEm { get; set; }
 
         public ICollection<RegiaoCidade> RegioesCidades { get; set; }
     }
