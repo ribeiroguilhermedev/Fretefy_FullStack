@@ -23,11 +23,19 @@ namespace Fretefy.Test.WebApi
                 options.UseSqlite("Data Source=Data\\Test.db");
             });
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Fretefy API",
+                    Version = "v1"
+                });
+            });
+            
             ConfigureInfraService(services);
             ConfigureDomainService(services);
 
-            services.AddMvc()
-                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Latest);
+            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Latest);
         }
 
         private void ConfigureDomainService(IServiceCollection services)
@@ -45,6 +53,13 @@ namespace Fretefy.Test.WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Fretefy API V1");
+                    c.RoutePrefix = "swagger";
+                });
             }
 
             app.UseRouting();
