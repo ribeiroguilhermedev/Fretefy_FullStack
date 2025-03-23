@@ -1,0 +1,145 @@
+.regioes-container {
+  padding: 20px;
+  
+  h2 {
+    margin-bottom: 20px;
+    color: darkgray;
+  }
+}
+
+.filtros {
+  margin-bottom: 20px;
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: gray;
+  }
+}
+
+.botoes-filtro {
+  display: flex;
+  gap: 10px;
+  
+  button {
+    padding: 8px 15px;
+    background-color: lightgray;
+    border: none;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: silver;
+    }
+    
+    &.active {
+      background-color: green;
+      color: white;
+    }
+  }
+}
+
+.regioes-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid gainsboro;
+  }
+  
+  th {
+    background-color: whitesmoke;
+    font-weight: bold;
+    color: gray;
+  }
+  
+  tbody tr:not(.cidades-container):nth-child(odd) {
+    background-color: aliceblue;
+  }
+  
+  tbody tr:not(.cidades-container):nth-child(even) {
+    background-color: azure;
+  }
+  
+  tr:not(.cidades-container):hover {
+    background-color: lightcyan;
+  }
+}
+
+.status-ativo {
+  color: green;
+  font-weight: bold;
+}
+
+.status-inativo {
+  color: red;
+  font-weight: bold;
+}
+
+.toggle-btn {
+  padding: 5px 10px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: darkgreen;
+  }
+}
+
+.cidades-container {
+  background-color: whitesmoke;
+  
+  td {
+    padding: 0;
+  }
+}
+
+.cidades-list {
+  padding: 15px;
+  
+  h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: gray;
+  }
+}
+
+.cidades-table {
+  width: 100%;
+  border-collapse: collapse;
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid gainsboro;
+  }
+  
+  th {
+    background-color: gainsboro;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: ghostwhite;
+  }
+  
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.loading {
+  padding: 20px;
+  text-align: center;
+  font-style: italic;
+  color: gray;
+}

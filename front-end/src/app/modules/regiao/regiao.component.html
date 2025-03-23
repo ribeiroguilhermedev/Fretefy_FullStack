@@ -1,3 +1,76 @@
-<p>
-  regiao works!
-</p>
+<div class="regioes-container">
+  <div class="filtros">
+    <label>Filtrar por status:</label>
+    <div class="botoes-filtro">
+      <button 
+        [class.active]="filtro === 'todos'"
+        (click)="aplicarFiltro('todos')">
+        Todos
+      </button>
+      <button 
+        [class.active]="filtro === 'ativos'" 
+        (click)="aplicarFiltro('ativos')">
+        Ativos
+      </button>
+      <button 
+        [class.active]="filtro === 'inativos'" 
+        (click)="aplicarFiltro('inativos')">
+        Inativos
+      </button>
+    </div>
+  </div>
+  
+  <table *ngIf="regioes$ | async as regioes" class="regioes-table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Criado Em</th>
+        <th>Atualizado Em</th>
+        <th>Status</th>
+        <th>Cidades</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let regiao of regioes">
+        <tr>
+          <td>{{ regiao.nome }}</td>
+          <td>{{ regiao.descricao }}</td>
+          <td>{{ regiao.criadoEm | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ regiao.atualizadoEm | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>
+            <span [ngClass]="regiao.ativo ? 'status-ativo' : 'status-inativo'">
+              {{ regiao.ativo ? 'Ativo' : 'Inativo' }}
+            </span>
+          </td>
+          <td>
+            <button (click)="regiao.mostrarCidades = !regiao.mostrarCidades" class="toggle-btn">
+              {{ regiao.mostrarCidades ? 'Esconder Cidades' : 'Mostrar Cidades' }}
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="regiao.mostrarCidades" class="cidades-container">
+          <td colspan="6">
+            <div class="cidades-list">
+              <h4>Cidades da Região</h4>
+              <table class="cidades-table">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>UF</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let cidade of regiao.cidades">
+                    <td>{{ cidade.nome }}</td>
+                    <td>{{ cidade.uf }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

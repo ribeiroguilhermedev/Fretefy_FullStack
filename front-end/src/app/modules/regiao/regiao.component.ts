@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { RegiaoService, Regiao, FiltroAtivo } from './regiao.service';
 
 @Component({
   selector: 'app-regiao',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./regiao.component.scss']
 })
 export class RegiaoComponent implements OnInit {
+  regioes$: Observable<Regiao[]>;
+  filtro: FiltroAtivo = 'todos';
 
-  constructor() { }
+  constructor(private regiaoService: RegiaoService) { }
 
   ngOnInit() {
+    this.carregarRegioes();
   }
 
+  carregarRegioes() {
+    this.regioes$ = this.regiaoService.getRegioes(this.filtro);
+  }
+
+  aplicarFiltro(_filtro: FiltroAtivo) {
+    this.filtro = _filtro;
+    this.carregarRegioes();
+  }
 }
