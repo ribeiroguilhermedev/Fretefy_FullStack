@@ -6,15 +6,18 @@
       dockerfile: Fretefy.Test.WebApi/Dockerfile
     ports:
       - "5001:80"
-    volumes:
-      - ./Fretefy.Test.WebApi/Data:/app/Data
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
+      - DB_PATH=/app/Data/Test.db
+    volumes:
+      - ./Fretefy.Test.WebApi/Data:/app/Data
   ef:
     build:
       context: ./Fretefy.Test.Infra/docker
       dockerfile: Dockerfile
+    environment:
+      - DB_PATH=/src/Fretefy.Test.WebApi/Data/Test.db
     volumes:
       - .:/src
       - ./Fretefy.Test.WebApi/Data:/src/Fretefy.Test.WebApi/Data

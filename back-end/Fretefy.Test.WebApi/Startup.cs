@@ -1,5 +1,9 @@
+using System;
+using System.IO;
+using System.Text.Json.Serialization;
 using Fretefy.Test.Domain.Interfaces;
 using Fretefy.Test.Domain.Interfaces.Repositories;
+using Fretefy.Test.Domain.Interfaces.Services;
 using Fretefy.Test.Domain.Services;
 using Fretefy.Test.Infra.EntityFramework;
 using Fretefy.Test.Infra.EntityFramework.Repositories;
@@ -20,7 +24,10 @@ namespace Fretefy.Test.WebApi
             services.AddScoped<DbContext, TestDbContext>();
             services.AddDbContext<TestDbContext>((provider, options) =>
             {
-                options.UseSqlite("Data Source=Data\\Test.db");
+                var dbPath = Environment.GetEnvironmentVariable("DB_PATH") 
+                             ?? Path.Combine("Fretefy.Test.WebApi", "Data", "Test.db");
+
+                options.UseSqlite($"Data Source={dbPath}");
             });
 
             services.AddSwaggerGen(c =>
@@ -41,11 +48,13 @@ namespace Fretefy.Test.WebApi
         private void ConfigureDomainService(IServiceCollection services)
         {
             services.AddScoped<ICidadeService, CidadeService>();
+            services.AddScoped<IRegiaoService, RegiaoService>();
         }
 
         private void ConfigureInfraService(IServiceCollection services)
         {
             services.AddScoped<ICidadeRepository, CidadeRepository>();
+            services.AddScoped<IRegiaoRepository, RegiaoRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
