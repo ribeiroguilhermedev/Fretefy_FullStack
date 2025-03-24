@@ -79,3 +79,14 @@ Para encerrar e remover volumes:
 ```bash
 docker-compose down -v
 ``` 
+
+
+## Front-end
+
+Para rodar o front-end com versões mais recentes do Node, utilize o  comando:
+
+```bash
+export NODE_OPTIONS=--openssl-legacy-provider && npm start
+```
+
+resolve problemas de compatibilidade com a versao do angular do projeto
